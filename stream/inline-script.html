@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Single loop polyfill</title>
+
+    <script type="text/javascript">
+        function supportsDeclarativeShadowDOM() {
+            return HTMLTemplateElement.prototype.hasOwnProperty("shadowRoot");
+        }
+
+        const replaceTemplateWithContent = supportsDeclarativeShadowDOM()
+            ? (currentScript) => currentScript.remove()
+            : (currentScript) => {
+                const template = currentScript.previousElementSibling;
+                const mode = template.getAttribute('shadowroot');
+                const shadowRoot = template.parentElement.attachShadow({ mode });
+                shadowRoot.appendChild(template.content);
+                // These two lines didn't affect performance appreciably:
+                template.remove();
+                currentScript.remove();
+            };
+    </script>
+</head>
+<body>
+    <x-nav>
+        <template shadowroot="open">
+            <style>
+                a {
+                    color: red;
+                }
+                a.active {
+                    color: black;
+                    font-weight: bold;
+                }
+                ul {
+                    display: flex;
+                    list-style: none;
+                    gap: 2rem;
+                }
+
+                li {
+                    margin: 0;
+                    padding: 0;
+                }
+            </style>
+            <ul>
+                <li><a href="?flavor=single-loop-script">Single loop script polyfill</a></li>
+                <li><a href="?flavor=inline-script" class="active">Inline script polyfill</a></li>
+                <li><a href="?flavor=mutation-observer">Single Mutation Observer polyfill</a></li>
+            </ul>
+        </template>
+        <script type="text/javascript">replaceTemplateWithContent(document.currentScript);</script>
+    </x-nav>
+    <h1>Inline script polyfill example</h1>
+
+    <x-content>
+        <template shadowroot="open">
+            <style>
+                main {
+                    background: #eee;
+                    padding: 1rem;
+                    border: 1px solid #aaa;
+                    border-radius: 0.25rem;
+                }
+            </style>
+            <h1>My article 1</h1>
+            <main>
+                <slot></slot>
+            </main>
+        </template>
+        <script type="text/javascript">replaceTemplateWithContent(document.currentScript);</script>
+
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+        est laborum.
+    </x-content>
+
+    <x-content>
+        <template shadowroot="open">
+            <style>
+                main {
+                    background: #eee;
+                    padding: 1rem;
+                    border: 1px solid #aaa;
+                    border-radius: 0.25rem;
+                }
+            </style>
+            <h1>My article 2</h1>
+            <main>
+                <slot></slot>
+            </main>
+        </template>
+        <script type="text/javascript">replaceTemplateWithContent(document.currentScript);</script>
+
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+        est laborum.
+    </x-content>
+
+
+    <x-content>
+        <template shadowroot="open">
+            <style>
+                main {
+                    background: #eee;
+                    padding: 1rem;
+                    border: 1px solid #aaa;
+                    border-radius: 0.25rem;
+                }
+            </style>
+            <h1>My article 3</h1>
+            <main>
+                <slot></slot>
+            </main>
+        </template>
+        <script type="text/javascript">replaceTemplateWithContent(document.currentScript);</script>
+
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+        est laborum.
+    </x-content>
+
+
+    <x-content>
+        <template shadowroot="open">
+            <style>
+                main {
+                    background: #eee;
+                    padding: 1rem;
+                    border: 1px solid #aaa;
+                    border-radius: 0.25rem;
+                }
+            </style>
+            <h1>My article 4</h1>
+            <main>
+                <slot></slot>
+            </main>
+        </template>
+        <script type="text/javascript">replaceTemplateWithContent(document.currentScript);</script>
+
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+        est laborum.
+    </x-content>
+
+
+    <x-content>
+        <template shadowroot="open">
+            <style>
+                main {
+                    background: #eee;
+                    padding: 1rem;
+                    border: 1px solid #aaa;
+                    border-radius: 0.25rem;
+                }
+            </style>
+            <h1>My article 5</h1>
+            <main>
+                <slot></slot>
+            </main>
+        </template>
+        <script type="text/javascript">replaceTemplateWithContent(document.currentScript);</script>
+
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+        est laborum.
+    </x-content>
+
+
+    <x-content>
+        <template shadowroot="open">
+            <style>
+                main {
+                    background: #eee;
+                    padding: 1rem;
+                    border: 1px solid #aaa;
+                    border-radius: 0.25rem;
+                }
+            </style>
+            <h1>My article 6</h1>
+            <main>
+                <slot></slot>
+            </main>
+        </template>
+        <script type="text/javascript">replaceTemplateWithContent(document.currentScript);</script>
+
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+        est laborum.
+    </x-content>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "dec-sdom-polyfill-spike",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jose D Rodriguez Velasco <jodarove@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
