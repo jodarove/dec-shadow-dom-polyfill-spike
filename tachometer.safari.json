@@ -1,0 +1,35 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Polymer/tachometer/master/config.schema.json",
+  "root": ".",
+  "sampleSize": 100,
+  "timeout": 2,
+  "benchmarks": [
+    {
+      "name": "Inline Script",
+      "url": "build/perf-inline-script.html",
+      "measurement": "global",
+      "browser": {
+        "name": "safari",
+        "windowSize": {"width": 1024,"height": 1024}
+      }
+    },
+    {
+      "name": "Single Loop Script",
+      "url": "build/perf-single-loop.html",
+      "measurement": "global",
+      "browser": {
+        "name": "safari",
+        "windowSize": {"width": 1024,"height": 1024}
+      }
+    },
+    {
+      "name": "MutationObserver",
+      "url": "build/perf-mutation-observer.html",
+      "measurement": "global",
+      "browser": {
+        "name": "safari",
+        "windowSize": {"width": 1024,"height": 1024}
+      }
+    }
+  ]
+}

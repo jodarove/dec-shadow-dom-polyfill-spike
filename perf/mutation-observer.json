@@ -1,0 +1,6 @@
+{
+  "numcopies": 5000,
+  "singleLoopPolyfill": false,
+  "inlinePolyfill": false,
+  "mutationObserverPolyfill": true
+}

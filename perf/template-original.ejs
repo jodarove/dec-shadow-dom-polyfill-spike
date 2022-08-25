@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+
+<H3>Shadow root creation speed test</H3>
+<div id=log>Running...</div>
+
+<script>
+  const log = document.getElementById('log');
+  const startTime = performance.now();
+  window.addEventListener("load", ev => {
+    const endTime = performance.now();
+    const elapsedMs = endTime - startTime;
+    window.tachometerResult = elapsedMs;
+    log.textContent = `Elapsed time: ${Math.round(elapsedMs)}ms`;
+  });
+</script>
+
+<script type="text/javascript">
+    function supportsDeclarativeShadowDOM() {
+        return HTMLTemplateElement.prototype.hasOwnProperty("shadowRoot");
+    }
+</script>
+
+<%if (inlinePolyfill) {%>
+    <script type="text/javascript">
+        const replaceTemplateWithContent = supportsDeclarativeShadowDOM()
+            ? (currentScript) => currentScript.remove()
+            : (currentScript) => {
+                const template = currentScript.previousElementSibling;
+                const mode = template.getAttribute('shadowroot');
+                const shadowRoot = template.parentElement.attachShadow({ mode });
+                shadowRoot.appendChild(template.content);
+                // These two lines didn't affect performance appreciably:
+                template.remove();
+                currentScript.remove();
+            };
+    </script>
+<%}-%>
+
+<%if (mutationObserverPolyfill) {%>
+    <script type="text/javascript">
+        function attachShadowRoots(mutationsList) {
+            for (let mutation of mutationsList) {
+                for (let n of mutation.addedNodes) {
+                    if (n.tagName === 'TEMPLATE') {
+                        const mode = n.getAttribute('shadowroot');
+                        const shadowRoot = n.parentElement.attachShadow({mode});
+                        shadowRoot.appendChild(n.content);
+                        n.remove();
+                    }
+                }
+            }
+        }
+
+        if (!supportsDeclarativeShadowDOM()) {
+            (new MutationObserver(attachShadowRoots)).observe(document.body,
+                { childList: true, subtree: true, attributeFilter: [ "shadowroot" ], });
+        }
+    </script>
+<%}-%>
+
+<%for (var i = 0; i < numcopies; i++) {%>
+    <x-content>
+        <template shadowroot="open">
+            <style>
+                main {
+                    background: #eee;
+                    padding: 1rem;
+                    border: 1px solid #aaa;
+                    border-radius: 0.25rem;
+                }
+            </style>
+            <h1>My article <%= i %></h1>
+            <main>
+                <slot></slot>
+            </main>
+        </template>
+        <%if (inlinePolyfill) {%>
+            <script type="text/javascript">replaceTemplateWithContent(document.currentScript);</script>
+        <%}-%>
+
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+        est laborum.
+    </x-content>
+<%}-%>
+
+<%if (singleLoopPolyfill) {%>
+<script type="text/javascript">
+    function polyfillDeclarativeShadowDom(docOrShadowRoot) {
+        docOrShadowRoot.querySelectorAll('template[shadowroot]').forEach((template) => {
+            const mode = template.getAttribute('shadowroot');
+            const shadowRoot = template.parentNode.attachShadow({ mode });
+            shadowRoot.appendChild(template.content);
+            template.remove();
+
+            polyfillDeclarativeShadowDom(shadowRoot);
+        });
+    }
+
+    if (!supportsDeclarativeShadowDOM()) {
+        polyfillDeclarativeShadowDom(document);
+    }
+</script>
+<%}-%>
+
+</body>
+</html>

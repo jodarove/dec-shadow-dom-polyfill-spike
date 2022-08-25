@@ -1,0 +1,41 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Polymer/tachometer/master/config.schema.json",
+  "root": ".",
+  "sampleSize": 100,
+  "timeout": 2,
+  "benchmarks": [
+    {
+      "name": "Inline Script",
+      "url": "build/perf-inline-script.html",
+      "measurement": "global",
+      "browser": {
+        "name": "firefox",
+        "binary": "/Users/jrodriguezvelasco/blt/app/234/patch/core/build/ssg_temp/81f8466712b534ae2da7965ebbf55531142cf836/com/salesforce/seti/firefox-resource/89.0/firefox.app/Contents/MacOS/firefox",
+        "headless": false,
+        "windowSize": {"width": 1024,"height": 1024}
+      }
+    },
+    {
+      "name": "Single Loop Script",
+      "url": "build/perf-single-loop.html",
+      "measurement": "global",
+      "browser": {
+        "name": "firefox",
+        "binary": "/Users/jrodriguezvelasco/blt/app/234/patch/core/build/ssg_temp/81f8466712b534ae2da7965ebbf55531142cf836/com/salesforce/seti/firefox-resource/89.0/firefox.app/Contents/MacOS/firefox",
+        "headless": false,
+        "windowSize": {"width": 1024,"height": 1024}
+      }
+    },
+    {
+      "name": "MutationObserver",
+      "url": "build/perf-mutation-observer.html",
+      "measurement": "global",
+      "browser": {
+        "name": "firefox",
+        "binary": "/Users/jrodriguezvelasco/blt/app/234/patch/core/build/ssg_temp/81f8466712b534ae2da7965ebbf55531142cf836/com/salesforce/seti/firefox-resource/89.0/firefox.app/Contents/MacOS/firefox",
+        "headless": false,
+        "windowSize": {"width": 1024,"height": 1024}
+      }
+    }
+  ]
+}
