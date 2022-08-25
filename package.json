@@ -1,7 +1,7 @@
 {
   "name": "dec-sdom-polyfill-spike",
   "version": "1.0.0",
-  "description": "",
+  "description": "Compares different approaches to polyfill Declarative Shadow DOM spec",
   "main": "index.js",
   "scripts": {
     "build-perf": "mkdir -p build && ejs ./perf/template.ejs -f ./perf/single-loop.json -o ./build/perf-single-loop.html && ejs ./perf/template.ejs -f ./perf/inline-script.json -o ./build/perf-inline-script.html && ejs ./perf/template.ejs -f ./perf/mutation-observer.json -o ./build/perf-mutation-observer.html ",
